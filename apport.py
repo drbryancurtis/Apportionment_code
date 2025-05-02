@@ -17,6 +17,7 @@ def apport2(mat: np.ndarray, k = 1):
 
     # check if all zeros matrix
     if not np.any(mat):
+        print('k = 0 is the only apportionment constant')
         matM = np.array([[1,0],[0,1]])
         matMinv = np.array([[1,0],[0,1]])
 
@@ -38,8 +39,9 @@ def apport2(mat: np.ndarray, k = 1):
 
         if k < rho/2:
             print('cannot apportion for k =', k)
-            print('instead using k =', rho/2)
             k = rho/2
+            print('k must be in the interval ['+ k +', inf)')
+            print('instead using k =', k)
 
         matP = evecs
         matPinv = np.linalg.inv(evecs)
@@ -58,18 +60,23 @@ def apport2(mat: np.ndarray, k = 1):
         if g == 0:
             if k < 1/np.sqrt(2):
                 print('cannot apportion for k =', k)
-                print('instead using k =', 1/np.sqrt(2))
-                k = 1/np.sqrt(2)
+                k = rho/np.sqrt(2)
+                print('k must be in the interval ['+ str(k) +', inf)')
+                print('instead using k =', k)
 
-            w = np.sqrt(k/(2*rho) + 0.25) + np.sqrt(k/(2*rho) - 0.25)*1j
+            w = sqrt(k**2/(2*rho**2) + 0.25) + sqrt(k**2/(2*rho**2) - 0.25)*1j
 
         elif (g**2).real >= abs(g)**4 or abs(g) > 1:
             raise ValueError('matrix is not apportionable')
 
         elif abs(g) == 1:
+            k = abs(evals[0]+evals[1])/2
+            print('k =', k, 'is the only apportionment constant')
             w = 0
 
         else:
+            k = abs(evals[0]+evals[1])/2 * np.sqrt(1 + (1 + abs(g)**4)/(2*(abs(g)**4 - (g**2).real)))
+            print('k =', k, 'is the only apportionment constant')
             w = g * np.sqrt((1 - abs(g)**4)/(2*(abs(g)**4 - (g**2).real))) * 1j
 
         matP = evecs
@@ -87,8 +94,8 @@ def apport2(mat: np.ndarray, k = 1):
 # Testing
 #
 
-mat = np.array([[1,1],[0,-1]])
-apport, matM = apport2(mat, 0.2)
+mat = np.array([[1,2],[0,-1]])
+apport, matM = apport2(mat, 0.001)
 print(apport)
 print(abs(apport))
 print(matM)

@@ -9,7 +9,7 @@ from numpy import meshgrid
 # Plot for paper
 #
 
-a, b = 1, 5
+a, b = 1, 0
 
 bnd1 = lambda x, y : (a + x)**2  + (b + y)**2 - (a - x)**2 - (b - y)**2
 bnd2 = lambda x, y : (((a + x + (b + y)*1j)/(x - a + (y - b)*1j))**2).real - abs((a + x + (b + y)*1j)/(x - a + (y - b)*1j))**4
