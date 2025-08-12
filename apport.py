@@ -4,7 +4,7 @@ from cmath import sqrt
 
 # Input: 2x2 ndarray and optional apportionment constant
 # Output: apportioned matrix, apportioning matrix
-def apport2(mat: np.ndarray, k = 1):
+def apport2x2(mat: np.ndarray, k = 1):
     # Check inputs are valid
     if not isinstance(mat, np.ndarray):
         raise TypeError("Input must be a numpy array")
@@ -91,11 +91,23 @@ def apport2(mat: np.ndarray, k = 1):
     return matB, matM
 
 #
-# Testing
+# Example
 #
+if __name__ == '__main__':
 
-mat = np.array([[1,2],[0,-1]])
-apport, matM = apport2(mat, 0.001)
-print(apport)
-print(abs(apport))
-print(matM)
+    # Making the displayed matrices more readable
+    np.set_printoptions(precision=2, suppress=True)
+
+    # Starting matrix and desired apportionment constant
+    mat = np.array([[1,2],[0,-1]])
+    k = 0.001
+
+    print('Starting matrix: \n' + str(mat))
+    print('Attempting to apportion matrix with apportionment constant k = ' + str(k))
+
+    # Using apportionment function
+    apport, matM = apport2x2(mat, k)
+
+    print('Apportioned matrix: \n' + str(apport))
+    print('Modulus of apportioned matrix: \n' + str(abs(apport)))
+    print('Apportioning matrix: \n' + str(matM))
