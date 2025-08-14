@@ -2,6 +2,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.widgets import Slider
 
+#
+# Plot admissible eigenvalues for 2x2 matrix
+#
+
 # Configure Matplotlib to use LaTex for text rendering
 plt.rcParams["text.usetex"] = True
 plt.rcParams["font.family"] = "serif"
@@ -72,9 +76,11 @@ def update(val):
                 alpha=0.4
         )
 
+        # Plot boundaries of admissible region
         ax.contour(x, y, bnd1(a, b, x, y), [0], colors='black')
         ax.contour(x, y, bnd2(a, b, x, y), [0], linestyles = 'dashed', colors='black')
 
+        # Plot the point corresponding to -a - bi since this is admissible 
         if x_min <= -a <= x_max and y_min <= -b <= y_max:
             ax.plot([-a], [-b], "o", markersize=5, color='black')
         else:

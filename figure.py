@@ -4,7 +4,7 @@ from numpy import arange
 from numpy import meshgrid
 
 #
-# Plot admissable eigenvalues for 2x2 matrix
+# Code for Figure 1
 #
 
 # Configure Matplotlib to use LaTex for text rendering
@@ -28,6 +28,7 @@ x, y = np.meshgrid(xvals, yvals)
 
 # Use imshow to plot the region defined by the constraints
 plt.imshow( ((bnd1(x,y)<=0) & (bnd2(x,y)<=0)).astype(int), extent=(x.min(),x.max(),y.min(),y.max()), origin="lower", cmap="Greys", alpha=0.4)
+# Plot boundaries of admissible region
 plt.contour(x, y, bnd1(x,y), [0], colors='black')
 plt.contour(x, y, bnd2(x,y), [0], linestyles = 'dashed', colors='black')
 
