@@ -38,7 +38,7 @@ plt.plot(-a, -b, "o", markersize=5, color = 'black')
 # Label the axes
 plt.xlabel("Real")
 plt.ylabel("Imaginary")
-plt.grid(True, linestyle=':', alpha=0.6)
+#plt.grid(True, linestyle=':', alpha=0.6)
 
 # Display the final plot
 plt.show()
